@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<title>Главная</title>
+	<link rel='stylesheet' href='style.css'>	
+</head>
+
+<body>
+<h3 class='top'>Главная</h3>
+<div class='menu'>
+	<a href='index.htm'>Главная</a>
+	<a href='setup.htm'>Системные настройки</a>
+	<a href='edit.htm'>Файлы</a>
+</div>
+
+<center>
+
+<div class='content'>
+	<h1 id='impulsOutEnable'>ON</h1>
+	<p><input type='text' size="10" id='impulsTime' name='impulsTime' value=''> Гц&nbsp;
+	<button onclick="sendData()">Задать частоту</button></p>
+	<p><button onclick="startImp()">Старт</button>&nbsp;&nbsp;
+	<button onclick="stopImp()">Стоп</button></p>
+	<button onclick="plus10Imp()">+10</button></p>
+	<button onclick="minus10Imp()">-10</button></p>
+</div>
+
+</center>
+
+<script>
+	let data = {
+		page: "index",
+		impulsTime: 0,
+		impulsOutEnable: 0,
+	};
+
+	function updateAllData() {
+		data["impulsTime"] = Math.round(1/document.getElementById("impulsTime").value/0.0000002/2);
+		console.log('data["impulsTime"]=  ', data["impulsTime"] );
+	};
+
+
+	function sendData () {
+		updateAllData();
+		console.log('TO Server: ', JSON.stringify( data ));
+		connection.send(JSON.stringify( data ));
+	};
+
+		
+
+		//console.log('URL: ', 'ws://' + location.host + ':81/');
+		//let connection = new WebSocket('ws://192.168.43.242:81/index.htm', ['arduino']);
+		let connection = new WebSocket('ws://' + location.host + ':81/index.htm', ['arduino']);
+	
+		connection.onopen = function () {
+			//connection.send('ping');		
+		};
+
+		connection.onerror = function (error) {
+			console.log('WebSocket Error ', error);
+			alert("Ошибка " + error.message);
+		};
+
+		connection.onmessage = function (e) {
+			console.log('FROM Server: ', e.data);
+			let obj = JSON.parse(e.data);
+			for (x in obj) {
+				if ( data[x]  != null ) {
+					data[x] = obj[x];
+					switch (x) {
+						case 'impulsOutEnable':
+							if ( data["impulsOutEnable"] == 1 ) {
+								document.getElementById("impulsOutEnable").innerHTML = 'ON'
+							}else{
+								document.getElementById("impulsOutEnable").innerHTML = 'OFF'
+							}
+							break;
+						case 'impulsTime':
+							document.getElementById("impulsTime").value = Math.round(1/obj[x]/0.0000002/2);
+					}
+				}
+			}
+		};
+
+
+	function startImp () {
+		data["impulsOutEnable"] = 1;
+		sendData();
+		document.getElementById("impulsOutEnable").innerHTML = 'ON'
+	};
+
+	function stopImp () {
+		data["impulsOutEnable"] = 0;
+		sendData();
+		document.getElementById("impulsOutEnable").innerHTML = 'OFF'
+	};
+	
+	function plus10Imp () {
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 10;
+		sendData ();
+		let msg = "plus";
+		console.log('TO Server: ', msg);
+		connection.send(msg);
+	};
+
+	function minus10Imp () {
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 10;
+		sendData ();
+		let msg = "minus";
+		console.log('TO Server: ', msg);
+		connection.send(msg);
+	};
+
+
+
+</script>
+</body>
+</html>
