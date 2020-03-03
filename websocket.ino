@@ -70,8 +70,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
           }
 
           if (doc["page"].as<String>() == "index") {
-            impulsTime = doc["impulsTime"];                    //Serial.println(var1);
-            impulsOutEnable = doc["impulsOutEnable"];          //Serial.println(var2);
+            impulsTime = doc["impulsTime"];                    //Serial.println(impulsTime);
+            impulsOutEnable = doc["impulsOutEnable"];          //Serial.println(impulsOutEnable);
+            timer1_write(impulsTime);
           }
           else if (doc["page"].as<String>() == "setup") {
             String stemp = doc["p_ssid"].as<String>();

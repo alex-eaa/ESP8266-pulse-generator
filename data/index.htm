@@ -23,8 +23,8 @@
 	<button onclick="sendData()">Задать частоту</button></p>
 	<p><button onclick="startImp()">Старт</button>&nbsp;&nbsp;
 	<button onclick="stopImp()">Стоп</button></p>
-	<button onclick="plus10Imp()">+10</button></p>
-	<button onclick="minus10Imp()">-10</button></p>
+	<button onclick="plus10Imp()">+1</button></p>
+	<button onclick="minus10Imp()">-1</button></p>
 </div>
 
 </center>
@@ -98,7 +98,7 @@
 	};
 	
 	function plus10Imp () {
-		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 10;
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 1;
 		sendData ();
 		let msg = "plus";
 		console.log('TO Server: ', msg);
@@ -106,7 +106,7 @@
 	};
 
 	function minus10Imp () {
-		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 10;
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 1;
 		sendData ();
 		let msg = "minus";
 		console.log('TO Server: ', msg);

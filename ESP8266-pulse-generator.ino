@@ -150,18 +150,6 @@ void loop() {
       }
     }
   */
-
-  /*
-    if (millis() - timeT2 > 2000) {
-      Serial.print(F("----time t2 = "));  Serial.println(t2);
-      Serial.print(F("----time t3 = "));  Serial.println(t3);
-      //Serial.print(F("---time_broadcastTXT = "));  Serial.println(T_broadcastTXT);
-      //Serial.printf("sendSpeedDataEnable [%u][%u][%u][%u][%u]\n", sendSpeedDataEnable[0], sendSpeedDataEnable[1], sendSpeedDataEnable[2], sendSpeedDataEnable[3], sendSpeedDataEnable[4]);
-      time_msg1 = 0;
-      timeT2 = millis();
-    }
-  */
-
 }
 
 
