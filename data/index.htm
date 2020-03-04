@@ -99,18 +99,19 @@
 	
 	function plus10Imp () {
 		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 1;
-		sendData ();
 		let msg = "plus";
 		console.log('TO Server: ', msg);
-		connection.send(msg);
+		sendData ();
+		//connection.send(msg);
+
 	};
 
 	function minus10Imp () {
 		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 1;
-		sendData ();
 		let msg = "minus";
 		console.log('TO Server: ', msg);
-		connection.send(msg);
+		sendData ();
+		//connection.send(msg);
 	};
 
 
