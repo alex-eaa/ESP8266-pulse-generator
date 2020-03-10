@@ -23,8 +23,9 @@
 	<button onclick="sendData()">Задать частоту</button></p>
 	<p><button onclick="startImp()">Старт</button>&nbsp;&nbsp;
 	<button onclick="stopImp()">Стоп</button></p>
-	<button onclick="plus10Imp()">+1</button></p>
-	<button onclick="minus10Imp()">-1</button></p>
+	<p><button onclick="minus1Imp()">-1</button><button onclick="plus1Imp()">+1</button></p>
+	<p><button onclick="minus3Imp()">-3</button><button onclick="plus3Imp()">+3</button></p>
+	<p><button onclick="minus5Imp()">-5</button><button onclick="plus5Imp()">+5</button></p>
 </div>
 
 </center>
@@ -97,7 +98,7 @@
 		document.getElementById("impulsOutEnable").innerHTML = 'OFF'
 	};
 	
-	function plus10Imp () {
+	function plus1Imp () {
 		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 1;
 		let msg = "plus";
 		console.log('TO Server: ', msg);
@@ -106,7 +107,7 @@
 
 	};
 
-	function minus10Imp () {
+	function minus1Imp () {
 		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 1;
 		let msg = "minus";
 		console.log('TO Server: ', msg);
@@ -114,8 +115,38 @@
 		//connection.send(msg);
 	};
 
+	function plus3Imp () {
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 3;
+		let msg = "plus";
+		console.log('TO Server: ', msg);
+		sendData ();
+		//connection.send(msg);
 
+	};
 
+	function minus3Imp () {
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 3;
+		let msg = "minus";
+		console.log('TO Server: ', msg);
+		sendData ();
+		//connection.send(msg);
+	};
+
+	function plus5Imp () {
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value + 5;
+		let msg = "plus";
+		console.log('TO Server: ', msg);
+		sendData ();
+		//connection.send(msg);
+
+	};	
+	function minus5Imp () {
+		document.getElementById("impulsTime").value = 1*document.getElementById("impulsTime").value - 5;
+		let msg = "minus";
+		console.log('TO Server: ', msg);
+		sendData ();
+		//connection.send(msg);
+	};
 </script>
 </body>
 </html>
